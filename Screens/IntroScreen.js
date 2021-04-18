@@ -1,12 +1,12 @@
 import React , { useState } from 'react'
-import { View, Text, StyleSheet, TextInput, FlatList, StatusBar, Button } from 'react-native'
+import { View, Text, StyleSheet, TextInput, FlatList, StatusBar, TouchableOpacity, Button } from 'react-native'
 
 import colors from './config/colors';
 
 export default function IntroScreen() {
 
     const [name, setName] = useState('');
-    const [droids, setDroids] = useState(["baby"])
+    const [droids, setDroids] = useState(["Love"])
 
 
     const txtHandler = (enteredName) => {
@@ -15,7 +15,6 @@ export default function IntroScreen() {
 
     const nameShow = () => {
         console.log(name)
-       // droids.push(name)
         setDroids([...droids,name])
 
     }
@@ -23,21 +22,21 @@ export default function IntroScreen() {
 
     return (
         <View style = {introStyle.container}>
+
+                <Text style={introStyle.texts}>Hey Droids!</Text>
+
                 { <FlatList
                     data={droids}
                     renderItem={({ item }) => {
                         return(
-                            <View style = {introStyle.items}>
+                            <TouchableOpacity style = {introStyle.items}>
                                 <Text style={introStyle.texts}>{item}</Text>
-                            </View>
+                            </TouchableOpacity>
                         );
                     }
                 }
                 keyExtractor = {(_, index) => `${index}`}
                 /> }
-
-            <Text style={introStyle.texts}>Hey Droids!</Text>
-            <Text style={introStyle.texts}>I am just testing...</Text>
 
 
             <TextInput 
@@ -49,20 +48,9 @@ export default function IntroScreen() {
 
             <Button
                 title="Press me"
-                color="#f194ff"
+                color="dodgerblue"
                 onPress={nameShow}
             />
-
-            {/* <View style={introStyle.result}>
-                <Text style={introStyle.texts}>
-                {name !== ''
-                    ? `Hello ${name}`
-                    : 'Please enter your name then hit the button'}
-                </Text>
-            </View> */}
-
-
-
             <StatusBar style="auto"/>
 
         </View>
@@ -75,14 +63,18 @@ const introStyle = StyleSheet.create({
     container: {
         width:"100%",
         height:"100%",
-        backgroundColor: "dodgerblue",
+        backgroundColor: "#fff",
     },
     items:{
         width: "100%",
-        backgroundColor: colors.secondary,
+        borderRadius: 10,
+        backgroundColor: "tomato",
+        marginVertical: 10,
+        padding: 5,
     },
     texts: {
         fontSize:50,
+        textTransform: "capitalize",
         fontStyle:"italic",
     },
     input: {
